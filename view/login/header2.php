@@ -1,4 +1,6 @@
-<?php ?>
+<?php 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,8 +56,17 @@
                     <a class="nav-link" href="../contact.php">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="signUp.php">Sign Up <span class="sr-only">(current)</span> </a>
+                    <a class="nav-link" href="../editProduct.php">Edit</a>
                 </li>
+                <?php 
+                    if (isset($_SESSION["useruid"])) {
+                        echo '<li class="nav-item"> <a class="nav-link" href="editProduct.php">Edit</a></li>';
+                        echo '<li class="nav-item"> <a class="nav-link" href="login/includes/logout.php">Log out</a></li>';
+                    }
+                    else {
+                        echo '<li class="nav-item"> <a class="nav-link" href="signUp.php">Sign Up</a></li>';
+                    }
+                ?>
 				<form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     

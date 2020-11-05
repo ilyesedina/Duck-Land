@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <?php ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,7 +41,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
@@ -54,8 +57,17 @@
                     <a class="nav-link" href="contact.php">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login/login.php">Log In</a>
+                    <a class="nav-link" href="editProduct.php">Edit</a>
                 </li>
+                <?php 
+                    if (isset($_SESSION["useruid"])) {
+                        echo '<li class="nav-item"> <a class="nav-link" href="editProduct.php">Edit</a></li>';
+                        echo '<li class="nav-item"> <a class="nav-link" href="login/includes/logout.php">Log out</a></li>';
+                    }
+                    else {
+                        echo '<li class="nav-item"> <a class="nav-link" href="login/login.php">Log In</a></li>';
+                    }
+                ?>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">

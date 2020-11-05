@@ -14,7 +14,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="name" placeholder="User name / Email...">
+						<input class="input100" type="text" name="uid" placeholder="User name / Email...">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -28,7 +28,23 @@
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					
+
+
+
+					<div class="text-center p-t-5">
+						<span class="txt1">
+							<?php 
+								if (isset($_GET["error"])) {
+									if ($_GET["error"] == "emptyinput") {
+										echo "<p>Fill in all fields!</p>";
+									}
+									else if ($_GET["error"] == "wronglogin") {
+										echo "<p>Incorrect login information!</p>";
+									}
+								}
+							?>
+						</span>
+					</div>					
 					<div class="container-login100-form-btn">
 						<button  name="submit" class="login100-form-btn">
 							Login
@@ -43,8 +59,7 @@
 							Username / Password?
 						</a>
 					</div>
-
-					<div class="text-center p-t-136">
+					<div class="text-center p-t-20">
 						<a class="txt2" href="signUp.php">
 							Create your Account
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>

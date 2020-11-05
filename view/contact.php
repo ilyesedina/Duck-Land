@@ -134,11 +134,11 @@ include_once 'login/header.php';
 <br>
 
 
-
-<!-- JS -->
-<script src="//code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+<?php
+include_once 'login/footer.php';
+?>
 
 </body>
+
 </html>
+

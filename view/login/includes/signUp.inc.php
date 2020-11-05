@@ -8,11 +8,11 @@ if (isset($_POST["submit"])) {
     $pwd = $_POST["pwd"];
     $pwdRepeat = $_POST["pwdrepeat"];
 
-    require_once 'db.inc.php';
+    require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
 
     if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false) {
-        header("location: ../signUp.php?error=emtyinput");
+        header("location: ../signUp.php?error=emptyinput");
         exit();
     }
     if (invalidUid($username) !== false) {
