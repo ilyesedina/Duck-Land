@@ -1,7 +1,6 @@
 <?php
 include_once 'login/header.php';
 
-session_start();
 require_once("login/includes/DBController.php");
 $db_handle = new DBController();
 
