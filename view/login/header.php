@@ -56,16 +56,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="editProduct.php">Edit</a>
-                </li>
                 <?php 
-                    if (isset($_SESSION["useruid"])) {
-                        echo '<li class="nav-item"> <a class="nav-link" href="editProduct.php">Edit</a></li>';
-                        echo '<li class="nav-item"> <a class="nav-link" href="login/includes/logout.php">Log out</a></li>';
-                    }
+                    if (isset($_SESSION['userid'])) {
+                        ?>
+                        <li class="nav-item"> <a class="nav-link" href="login.php?logout=true">Log out</a></li>
+                    <?php 
+                            if ($_SESSION['userid'] == 3 || $_SESSION['userid'] == 1){ ?> 
+                                <li class="nav-item"> <a class="nav-link" href="editProduct.php">Edit</a></li>
+                                <?php
+                            }
+                    
+                }
                     else {
-                        echo '<li class="nav-item"> <a class="nav-link" href="login/login.php">Log In</a></li>';
+                        echo '<li class="nav-item"> <a class="nav-link" href="login.php">Log In</a></li>';
                     }
                 ?>
             </ul>

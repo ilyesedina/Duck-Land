@@ -1,10 +1,10 @@
 <?php
 $serverName = "localhost";
-$dBUsername = "root";
+$dBUserName = "root";
 $dBPassword = "";
 $dBName = "duckshopdb";
 
-$conn =  mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
+$conn =  mysqli_connect($serverName, $dBUserName, $dBPassword, $dBName);
 
 if(!$conn){
     die("Connection failed: " . mysqli_connect_error());

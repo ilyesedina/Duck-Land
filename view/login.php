@@ -1,5 +1,12 @@
 <?php 
-	include_once 'header2.php';
+	if (isset($_GET["logout"])){
+		session_start();
+		session_unset();
+		session_destroy();
+		header("location: index.php");
+		exit();
+	} 
+	include_once 'login/header2.php';
 ?>
 
 <body>
@@ -8,7 +15,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 
-				<form action="includes/login.inc.php" method="post" class="login100-form validate-form">
+				<form action="login/includes/login.inc.php" method="post" class="login100-form validate-form">
 					<span class="login100-form-title">
 						Member Login
 					</span>
@@ -73,5 +80,5 @@
 </body>
 
 <?php 
-	include_once 'footer.php';
+	include_once 'login/footer.php';
 ?>

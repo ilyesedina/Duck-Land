@@ -1,9 +1,9 @@
 <?php 
-	include_once 'header2.php';
+	include_once 'login/header2.php';
 ?>
 
 <body>
-<form action="includes/signUp.inc.php" method="post"> 
+<form action="login/includes/signUp.inc.php" method="POST"> 
     <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
@@ -107,5 +107,5 @@
 </body>
 
 <?php 
-	include_once 'footer.php';
+	include_once 'login/footer.php';
 ?>
