@@ -66,7 +66,7 @@ $db_handle = new DBController();
                                 </div>
                             </div>
                         </div>
-                        <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
+                        <a href="cart.php" class="btn btn-success btn-lg btn-block text-uppercase">
                             <i class="fa fa-shopping-cart"></i> Add To Cart
                         </a>
                     </form>

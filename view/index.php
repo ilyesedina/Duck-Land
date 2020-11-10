@@ -72,6 +72,7 @@ include_once 'login/header.php';
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        
                         <div class="col-sm">
                             <div class="card">
                                 <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
@@ -89,57 +90,22 @@ include_once 'login/header.php';
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-sm">
                             <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+
                         <div class="col-sm">
                             <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+
                         <div class="col-sm">
                             <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -147,95 +113,10 @@ include_once 'login/header.php';
     </div>
 </div>
 
-
-<div class="container mt-3 mb-4">
-    <div class="row">
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header bg-primary text-white text-uppercase">
-                    <i class="fa fa-trophy"></i> Best products
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <div class="card">
-                                <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="btn btn-danger btn-block">99.00 $</p>
-                                        </div>
-                                        <div class="col">
-                                            <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <?php
 include_once 'login/footer.php';
 ?>
 
-</body>
-</html>
+
