@@ -3,12 +3,29 @@ include_once 'login/header.php';
 include ("login/includes/DBController.php");
 $edit = new DBController();
 $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.postalCodee = postalcode.PostalCodeID");
-
 ?>
-
+<?php 
+define('SITE_KEY', '6Ld-MeMZAAAAAPsXCpNWDOW-FUVhQaum0LO9ZCO9');
+define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
+?>
+<script src="https://www.google.com/recaptcha/api.js?render=<?php echo SITE_KEY; ?>"></script>
 
 <?php
     $message_sent = false;
+    if ($_POST){ 
+        function getCaptcha($SecretKey){
+            $Response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$SecretKey}");
+            $Return = json_decode($Response);
+            return $Return;
+        }
+        $Return = getCaptcha($_POST['g-recaptcha-response']);
+        //var_dump($Return);
+         if($Return->success == true && $Return->score > 0.5){
+            echo "Succes!";
+        }else{
+            echo "You are a Robot!";
+        } 
+    };  
     if(isset($_POST['email']) && $_POST['email'] != ''){
         //if we have an email entered
         if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ){
@@ -56,8 +73,35 @@ $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.
                     <div class="card-body">
                     <h3>Thanks, we'll be in touch</h3>
                     </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name"
+                                name="name" placeholder="Enter your name here" tabindex="1" required>
+                            </div>
+                            <div class="form-group ">
+                                <input type="email" class="form-control" <?= $invalid_class_name ?? "" ?> id="email"
+                                name="email" placeholder="Email" tabindex="2" required>
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="subject"
+                                name="subject" placeholder="Subject" tabindex="3" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" rows="6"
+                                name="message" placeholder="Enter Message..." tabindex="4" required></textarea>
+                            </div>
+                            
+                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+                            <div class="mx-auto">
+                            <button type="submit" name ="submit" class="btn btn-primary text-right">Submit</button></div>
+                        </form>
+                    </div>
                 </div>
             </div>
+                   
+
         <div class="col-12 col-sm-4">
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
@@ -96,7 +140,7 @@ $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.
                                 <input type="text" class="form-control" id="name"
                                 name="name" placeholder="Enter your name here" tabindex="1" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <input type="email" class="form-control" <?= $invalid_class_name ?? "" ?> id="email"
                                 name="email" placeholder="Email" tabindex="2" required>
                                 <small id="emailHelp" class="form-text text-muted"></small>
@@ -109,8 +153,10 @@ $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.
                                 <textarea class="form-control" id="message" rows="6"
                                 name="message" placeholder="Enter Message..." tabindex="4" required></textarea>
                             </div>
+                            
+                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
                             <div class="mx-auto">
-                            <button type="submit" class="btn btn-primary text-right">Submit</button></div>
+                            <button type="submit" name ="submit" class="btn btn-primary text-right">Submit</button></div>
                         </form>
                     </div>
                 </div>
@@ -131,6 +177,14 @@ $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.
         </div>
     </div>
     </form>
+        <script>
+        grecaptcha.ready(function() {
+        grecaptcha.execute('<?php echo SITE_KEY; ?>', {action: 'homepage'}).then(function(token) {
+            //console.log(token);
+            document.getElementById('g-recaptcha-response').value=token;
+        });
+        });
+    </script>
 </div>
 
 <?php
