@@ -51,21 +51,20 @@
                     <a class="nav-link" href="category.php">Categories</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="product.php">Product</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contact</a>
                 </li>
                 <?php 
                     if (isset($_SESSION['userid'])) {
                         ?>
-                        <li class="nav-item"> <a class="nav-link" href="login.php?logout=true">Log out</a></li>
                     <?php 
                             if ($_SESSION['userid'] == 3 || $_SESSION['userid'] == 1){ ?> 
-                                <li class="nav-item"> <a class="nav-link" href="editProduct.php">Edit</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="editProduct.php">Create</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="companyinfo.php">Edit Company</a></li>
                                 <?php
                             }
-                    
+                            ?>
+                            <li class="nav-item"> <a class="nav-link" href="login.php?logout=true">Log out</a></li>
+                            <?php                    
                 }
                     else {
                         echo '<li class="nav-item"> <a class="nav-link" href="login.php">Log In</a></li>';

@@ -1,5 +1,9 @@
 <?php
 include_once 'login/header.php';
+include ("login/includes/DBController.php");
+$edit = new DBController();
+$postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.postalCodee = postalcode.PostalCodeID");
+
 ?>
 
 
@@ -10,10 +14,10 @@ include_once 'login/header.php';
         if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ){
             //if the email is valid        
             //submit the form
-            $userName = $_POST['name'];
-            $userEmail = $_POST['email'];
-            $messageSubject = $_POST['subject'];
-            $message = $_POST['message'];
+            $userName = filter_var($_POST['name'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $userEmail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            $messageSubject = filter_var($_POST['subject'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $message = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
 
             $to = "edin0407@easv365.dk";
             $body = "";
@@ -58,11 +62,13 @@ include_once 'login/header.php';
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
                 <div class="card-body">
-                    <p>Siøvej 3</p>
-                    <p>6810 Esbjerg</p>
-                    <p>Denmark</p>
-                    <p>Email : info@duckland.com</p>
-                    <p>Tel. +33 12 56 11 51 84</p>
+
+                    <p> <b>CompanyName:</b>     <?php echo $postalcode[0]["CompanyName"];?></p>
+                    <p> <b>Dscription:</b>     <?php echo $postalcode[0]["dscription"];?></p>
+                    <p> <b>Email: </b>   <?php echo $postalcode[0]["email"];?></p>
+                    <p> <b>Phone Number: </b>   <?php echo $postalcode[0]["phoneNumber"];?></p>
+                    <p> <b>Postalcodee: </b>    <?php echo $postalcode[0]["postalCodee"];?></p>
+                    <p> <b>City:</b>    <?php echo $postalcode[0]["city"];?></p>
 
                 </div>
 
@@ -113,12 +119,12 @@ include_once 'login/header.php';
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
                 <div class="card-body">
-                    <p>Siøvej 3</p>
-                    <p>6810 Esbjerg</p>
-                    <p>Denmark</p>
-                    <p>Email : info@duckland.com</p>
-                    <p>Tel. +33 12 56 11 51 84</p>
-
+                    <p> <b>CompanyName:</b>     <?php echo $postalcode[0]["CompanyName"];?></p>
+                    <p> <b>Dscription:</b>     <?php echo $postalcode[0]["dscription"];?></p>
+                    <p> <b>Email: </b>   <?php echo $postalcode[0]["email"];?></p>
+                    <p> <b>Phone Number: </b>   <?php echo $postalcode[0]["phoneNumber"];?></p>
+                    <p> <b>Postalcodee: </b>    <?php echo $postalcode[0]["postalCodee"];?></p>
+                    <p> <b>City:</b>    <?php echo $postalcode[0]["city"];?></p>
                 </div>
 
             </div>

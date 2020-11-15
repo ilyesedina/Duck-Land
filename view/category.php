@@ -19,10 +19,10 @@ $db_handle = new DBController();
                     <div class="card">
                     <div class="col-12 col-3">
                         
-                    <form method="post" action="index.php?action=add&code=<?php echo $product_array[$aNumber]["code"]; ?>"> 
+                    <form method="post" action="index.php?action=add&productID=<?php echo $product_array[$aNumber]["productID"]; ?>"> 
                         <div class="card-body">
                         <img class="card-img-top" src="img/<?php echo $product_array[$aNumber]["Image"]; ?>" alt="Card image cap">
-                            <h4 class="card-title"><a href="product.php?id=<?php echo $product_array[$aNumber]["code"]; ?>" title="View Product"><?php echo $product_array[$aNumber]["pname"]; ?></a></h4>
+                            <h4 class="card-title"><a href="product.php?productID=<?php echo $product_array[$aNumber]["productID"]; ?>" title="View Product"><?php echo $product_array[$aNumber]["pname"]; ?></a></h4>
                             <div class="row">
                                 <div class="col">
                                     <p class="btn btn-danger btn-block"><?php echo $product_array[$aNumber]["price"]." DKK"; ?></p>
@@ -36,7 +36,7 @@ $db_handle = new DBController();
                         if (isset($_SESSION['userid'])) { 
                             if ($_SESSION['userid'] == 3 || $_SESSION['userid'] ==1 ){ ?> 
                                 <a href="editProduct.php?productID=<?php echo $product_array[$aNumber]["productID"]; ?>" class="btn btn-success btn-block">Edit</a>
-                                <a href="editProduct.php?delete=true&productID=<?php echo $product_array[$aNumber]["productID"]; ?>" class="btn btn-danger btn-block">Delete</a>
+                                <a href="editProduct.php?delete=<?php echo $product_array[$aNumber]["productID"]; ?>" class="btn btn-danger btn-block">Delete</a>
                                 <?php } }?>
                         </div>
                     </form>

@@ -2,11 +2,11 @@
 
 if (isset($_POST["submit"])) {
 
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $username = $_POST["uid"];
-    $pwd = $_POST["pwd"];
-    $pwdRepeat = $_POST["pwdrepeat"];
+    $name = filter_var($_POST["name"], FILTER_SANITIZE_SPECIAL_CHARS);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+    $username = filter_var($_POST["uid"], FILTER_SANITIZE_SPECIAL_CHARS);
+    $pwd = filter_var($_POST["pwd"], FILTER_SANITIZE_SPECIAL_CHARS);
+    $pwdRepeat = filter_var($_POST["pwdrepeat"], FILTER_SANITIZE_SPECIAL_CHARS);
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';

@@ -1,9 +1,10 @@
 <?php
 class DBController {
-	private $host = "localhost";
-	private $user = "root";
-	private $password = "";
-	private $database = "duckshopdb";
+	private $host = "mysql79.unoeuro.com";
+	private $user = "especialphoto_dk";
+	private $password = "ndwa4H69cD";
+	private $database = "especialphoto_dk_db";
+	private $port = 3306;
 	private $conn;
 	
 	function __construct() {
@@ -11,7 +12,7 @@ class DBController {
 	}
 	
 	function connectDB() {
-		$conn = mysqli_connect($this->host,$this->user,$this->password,$this->database);
+		$conn = mysqli_connect($this->host,$this->user,$this->password,$this->database, $this->port);
 		return $conn;
 	}
 	

@@ -14,7 +14,6 @@ require_once 'process.php';
                 <?php
         }  }
 
-        var_dump($_SESSION);
 
         if ($_SESSION['userid'] == 3 || $_SESSION['userid'] ==1 ){
 
@@ -29,7 +28,7 @@ require_once 'process.php';
         require_once 'process.php'; ?> 
         <div class="container">
         <?php 
-        $mysqli = new mysqli('localhost', 'root', '', 'duckshopdb') or die(mysqli_error($mysqli));
+        $mysqli = new mysqli('mysql79.unoeuro.com', 'especialphoto_dk', 'ndwa4H69cD', 'especialphoto_dk_db', 3306) or die(mysqli_error($mysqli));
         $result = $mysqli->query("SELECT * FROM product") or die($mysqli->error);
         //pre_r($result);
         ?>
@@ -59,6 +58,10 @@ require_once 'process.php';
                     <div class="form-group">
                         <label for="price">Price</label>
                         <input type="number" value="<?php echo $editall[0]["price"] ?>" min="0" max="9999" name="price" id="price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="w-100 form-control" rows="6" type="text" id="description" name="description"><?php echo $editall[0]["description"] ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>
@@ -92,6 +95,7 @@ require_once 'process.php';
                         <th>In Stock</th>
                         <th>Rating</th>
                         <th>Price</th>
+                        <th>Description</th>
                         <th colspan="2">Action</th>
                     </tr>
                 </thead>
@@ -103,6 +107,7 @@ require_once 'process.php';
                     <td><?php echo $row['inStock']; ?></td>
                     <td><?php echo $row['rating']; ?></td>
                     <td><?php echo $row['price']; ?></td>
+                    <td><?php echo $row['description']; ?></td>
                     <td>
                         <a href="editProduct.php?productID=<?php echo $row['productID']; ?>"
                         class="btn btn-info">Edit</a>
@@ -134,7 +139,7 @@ require_once 'process.php';
        else {
         ?>
         <?php 
-        $mysqli = new mysqli('localhost', 'root', '', 'duckshopdb') or die(mysqli_error($mysqli));
+        $mysqli = new mysqli('mysql79.unoeuro.com', 'especialphoto_dk', 'ndwa4H69cD', 'especialphoto_dk_db', 3306) or die(mysqli_error($mysqli));
         $result = $mysqli->query("SELECT * FROM product") or die($mysqli->error);
         //pre_r($result);
         //pre_r($result->fetch_assoc());
@@ -172,6 +177,10 @@ require_once 'process.php';
                     <div class="form-group">
                         <label for="price">Price</label>
                         <input type="number" min="0" max="99999" name="price" id="price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="w-100 form-control" rows="6" type="text" id="description" name="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>

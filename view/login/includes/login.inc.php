@@ -2,8 +2,8 @@
 
 if (isset($_POST["submit"])) {
 
-    $username = $_POST["uid"];
-    $pwd = $_POST["pwd"];
+    $username = filter_var($_POST["uid"], FILTER_SANITIZE_SPECIAL_CHARS);
+    $pwd = filter_var($_POST["pwd"], FILTER_SANITIZE_SPECIAL_CHARS);
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';

@@ -3,20 +3,13 @@ include_once 'login/header.php';
 
 require_once("login/includes/DBController.php");
 $db_handle = new DBController();
-
+if (isset($_GET["productID"])) {
+    $senetisedProductId = trim(intval($_GET["productID"]));
+    $edit = new DBController();
+    $editall = $edit->runQuery("SELECT * FROM product JOIN category ON product.category = category.catID WHERE productID = $senetisedProductId");
+    if (!empty($editall)) {
 ?>
 <body>
-
-
-<?php
-
-//if(isset($_GET["product"])){ 
-    //$product_id = $_GET["product"]; 
-    /*
-    - Make a database query. "SELECT * WHERE id = $product_id"
-    - Store the data in a variable ex. $databaseData
-    - use the variable in your template ex. $databaseData[name]
-    */?>
 <br> 
 <div class="container">
     <div class="row">
@@ -25,7 +18,7 @@ $db_handle = new DBController();
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <a href="" data-toggle="modal" data-target="#productModal">
-                        <img class="img-fluid" src="" />
+                        <img class="img-fluid" src="img/<?php echo $editall[0]["Image"]?>" alt="Card image cap">
                         <p class="text-center">Zoom</p>
                     </a>
                 </div>
@@ -36,20 +29,13 @@ $db_handle = new DBController();
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                <p class="price">Product</p>
+                <p class="price"><?php echo $editall[0]["pname"];?></p>
+                <p><?php echo $editall[0]["categoryName"];?></p>
                     <h1><?php //echo $product_id?></h1>
-                    <p class="price">99.00 $</p>
-                    <p class="price_discounted">149.90 $</p>
+                    
+                    <p class="price"><?php echo $editall[0]["price"] ?>dkk</p>
+                 <!--   <p class="price_discounted">149.90 $</p> -->
                     <form method="get" action="cart.html">
-                        <div class="form-group">
-                            <label for="colors">Color</label>
-                            <select class="custom-select" id="colors">
-                                <option selected>Select</option>
-                                <option value="1">Blue</option>
-                                <option value="2">Red</option>
-                                <option value="3">Green</option>
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
@@ -70,25 +56,15 @@ $db_handle = new DBController();
                             <i class="fa fa-shopping-cart"></i> Add To Cart
                         </a>
                     </form>
-                    <div class="product_rassurance">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Fast delivery</li>
-                            <li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br/>Secure payment</li>
-                            <li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br/>+33 1 22 54 65 60</li>
-                        </ul>
-                    </div>
                     <div class="reviews_product p-3 mb-2 ">
-                        3 reviews
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        (4/5)
+                        Rating 
+                        <?php
+                        for ($x = 0; $x <= $editall[0]["rating"]; $x++) { ?>
+                             <i class="fa fa-star"></i>
+                              <?php
+                          }
+                         ?>
                         <a class="pull-right" href="#reviews">View all reviews</a>
-                    </div>
-                    <div class="datasheet p-3 mb-2 bg-info text-white">
-                        <a href="" class="text-white"><i class="fa fa-file-text"></i> Download DataSheet</a>
                     </div>
                 </div>
             </div>
@@ -101,12 +77,16 @@ $db_handle = new DBController();
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-align-justify"></i> Description</div>
                 <div class="card-body">
-                    <p class="card-text">
-                        Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-                    </p>
-                    <p class="card-text">
-                        Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans. Un professeur du Hampden-Sydney College, en Virginie, s'est intéressé à un des mots latins les plus obscurs, consectetur, extrait d'un passage du Lorem Ipsum, et en étudiant tous les usages de ce mot dans la littérature classique, découvrit la source incontestable du Lorem Ipsum. Il provient en fait des sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum" (Des Suprêmes Biens et des Suprêmes Maux) de Cicéron. Cet ouvrage, très populaire pendant la Renaissance, est un traité sur la théorie de l'éthique. Les premières lignes du Lorem Ipsum, "Lorem ipsum dolor sit amet...", proviennent de la section 1.10.32.
-                    </p>
+                <?php 
+                $messagedescript = "Dosen't have a description of this product.";
+                
+                if (isset($editall[0]["description"])) {
+                echo $editall[0]["description"];
+                }
+                else {
+                   echo $messagedescript ;
+                }
+                ?>
                 </div>
             </div>
         </div>
@@ -205,23 +185,14 @@ include_once 'login/footer.php';
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php 
+    }
+    else {
+    header('location: category.php');
+} 
+}
+else {
+    header('location: category.php');
+}
+    ?> 
+<body>
