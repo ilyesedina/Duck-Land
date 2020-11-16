@@ -1,5 +1,5 @@
 <?php 
-	include_once 'login/header2.php';
+    include_once 'login/header2.php';
 ?>
 
 <body>
@@ -52,7 +52,14 @@
                                 <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        
+
+                        <div><tr class="tablerow">
+                                <p><img src="login/includes/captcha.php" alt="captcha image" name="captcha" ></p>
+                                <input name="captcha" id="captcha" type="text" placeholder="Type the captcha..."
+                                    class="demo-input captcha-input">
+                                 <br> </br>
+                            </tr> 
+                        </div>
                         <div class="container-login100-form-btn">
                             <button name="submit" class="login100-form-btn">
                                 Sign Up

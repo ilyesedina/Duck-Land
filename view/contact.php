@@ -13,15 +13,14 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
 
 <?php
     $message_sent = false;
-    $captcha = $_POST['captcha'];
-    if(isset($_POST['submit'])) {
-         if($_SESSION["captcha_test"] ==$captcha){
+   /*  if(isset($_POST['submit'])) {
+        if($_SESSION["captcha_test"] ==$_POST['captcha']){
             echo 'Matched';
         }
         else{
             echo 'Please enter a valid captcha code.';
         }
-    }
+    } */
     if($_POST){ 
         function getCaptcha($SecretKey){
             $Response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$SecretKey}");
@@ -38,6 +37,8 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
     };  
     if(isset($_POST['email']) && $_POST['email'] != ''){
         //if we have an email entered
+        if($_SESSION["captcha_test"] ==$_POST['captcha']){
+            echo 'Matched';
         if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ){
             //if the email is valid        
             //submit the form
@@ -65,7 +66,10 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
         else{
             $invalid_class_name = "form-invalid";
         }
-
+    }
+    else{
+        echo 'Please enter a valid captcha code.';
+    }
     }
 
 ?>

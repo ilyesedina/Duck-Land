@@ -69,7 +69,6 @@ function uidExists($conn, $username, $email) {
 }
 
 function createUser($conn, $name, $email, $username, $pwd) {
-    var_dump($conn);
     $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($conn);
     if (mysqli_stmt_prepare($stmt, $sql)) {
@@ -77,8 +76,6 @@ function createUser($conn, $name, $email, $username, $pwd) {
         mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPwd);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-
-
 
         header("location: ../../signUp.php?error=none");
     exit();

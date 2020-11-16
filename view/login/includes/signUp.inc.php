@@ -1,17 +1,17 @@
 <?php
-
 if (isset($_POST["submit"])) {
-
     $name = filter_var($_POST["name"], FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     $username = filter_var($_POST["uid"], FILTER_SANITIZE_SPECIAL_CHARS);
     $pwd = filter_var($_POST["pwd"], FILTER_SANITIZE_SPECIAL_CHARS);
     $pwdRepeat = filter_var($_POST["pwdrepeat"], FILTER_SANITIZE_SPECIAL_CHARS);
+    $captcha = filter_var($_POST['captcha'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $session_captcha = $_SESSION['captcha_test'];
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
-
-    if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false) {
+   
+    if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat,) !== false) {
         header("location: ../../signUp.php?error=emptyinput");
         exit();
     }
@@ -33,8 +33,9 @@ if (isset($_POST["submit"])) {
     }
 
     createUser($conn, $name, $email, $username, $pwd);
+    }
 
-}
+
 else{
     header("location: ../../signUp.php");
     exit();
