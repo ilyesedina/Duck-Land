@@ -3,6 +3,7 @@ include_once 'login/header.php';
 include ("login/includes/DBController.php");
 $edit = new DBController();
 $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.postalCodee = postalcode.PostalCodeID");
+session_regenerate_id();
 ?>
 <?php 
 define('SITE_KEY', '6Ld-MeMZAAAAAPsXCpNWDOW-FUVhQaum0LO9ZCO9');
@@ -12,7 +13,16 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
 
 <?php
     $message_sent = false;
-    if ($_POST){ 
+    $captcha = $_POST['captcha'];
+    if(isset($_POST['submit'])) {
+         if($_SESSION["captcha_test"] ==$captcha){
+            echo 'Matched';
+        }
+        else{
+            echo 'Please enter a valid captcha code.';
+        }
+    }
+    if($_POST){ 
         function getCaptcha($SecretKey){
             $Response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$SecretKey}");
             $Return = json_decode($Response);
@@ -35,6 +45,9 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
             $userEmail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $messageSubject = filter_var($_POST['subject'], FILTER_SANITIZE_SPECIAL_CHARS);
             $message = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $captcha = filter_var($_POST['captcha'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $session_captcha = $_SESSION['captcha_test'];
 
             $to = "edin0407@easv365.dk";
             $body = "";
@@ -92,7 +105,12 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
                                 <textarea class="form-control" id="message" rows="6"
                                 name="message" placeholder="Enter Message..." tabindex="4" required></textarea>
                             </div>
-                            
+                            <tr class="tablerow">
+                                <p><img src="login/includes/captcha.php" alt="captcha image" name="captcha" ></p>
+                                <input name="captcha" id="captcha" type="text"
+                                    class="demo-input captcha-input">
+                                 <br> </br>
+                            </tr>   
                             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
                             <div class="mx-auto">
                             <button type="submit" name ="submit" class="btn btn-primary text-right">Submit</button></div>
@@ -153,10 +171,18 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
                                 <textarea class="form-control" id="message" rows="6"
                                 name="message" placeholder="Enter Message..." tabindex="4" required></textarea>
                             </div>
-                            
                             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
-                            <div class="mx-auto">
+                          
+                            <tr class="tablerow">
+                                <p><img src="login/includes/captcha.php" alt="captcha image" name="captcha" ></p>
+                                <input name="captcha" id="captcha"type="text" placeholder="Type captcha..."
+                                    class="demo-input captcha-input">
+                                 <br> </br>
+                            </tr>   
+
+                                 <div class="mx-auto">
                             <button type="submit" name ="submit" class="btn btn-primary text-right">Submit</button></div>
+                            
                         </form>
                     </div>
                 </div>
