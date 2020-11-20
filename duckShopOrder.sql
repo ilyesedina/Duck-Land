@@ -88,6 +88,7 @@ CREATE TABLE `Product`
     FOREIGN KEY (category) REFERENCES Category (catID)
 );
 
+
 INSERT INTO Product VALUES (NULL, 'Rubber', '', true, 123.6, 21, 1);
 -- INSERT INTO Product VALUES (NULL, 'Rubber', 'duck.png');
 -- INSERT INTO Product VALUES (NULL, 'Rubber Duck', 'ruber.jpg');

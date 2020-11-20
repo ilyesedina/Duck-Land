@@ -35,7 +35,7 @@ if (isset($_GET["productID"])) {
                     
                     <p class="price"><?php echo $editall[0]["price"] ?>dkk</p>
                  <!--   <p class="price_discounted">149.90 $</p> -->
-                    <form method="get" action="cart.html">
+                    <form method="get" action="cart.php">
                         <div class="form-group">
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
@@ -44,7 +44,7 @@ if (isset($_GET["productID"])) {
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="100" value="1">
+                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="10000" value="1">
                                 <div class="input-group-append">
                                     <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
@@ -96,36 +96,26 @@ if (isset($_GET["productID"])) {
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
                 <div class="card-body">
-                    <div class="review">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                        <meta itemprop="datePublished" content="01-01-2016">January 01, 2020
-
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        by Paul Smith
-                        <p class="blockquote">
-                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </p>
-                        <hr>
+                    <!--<form action="process.php?productID=<//?php echo $_GET["productID"]; ?>" method="POST"> -->
+                    <form id="reviewForm" method="POST" action="business/handleReview.php?action=create">
+                        <input type="hidden" id='reviewID' name="reviewID" value="">
+                        <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" 
+                        value="<?php echo $editall[0]["fullName"] ?>" 
+                        id='fullName' name="fullName" class="form-control"/>
                     </div>
-                    <div class="review">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                        <meta itemprop="datePublished" content="01-01-2016">January 01, 2020
-
-                        <span class="fa fa-star" aria-hidden="true"></span>
-                        <span class="fa fa-star" aria-hidden="true"></span>
-                        <span class="fa fa-star" aria-hidden="true"></span>
-                        <span class="fa fa-star" aria-hidden="true"></span>
-                        <span class="fa fa-star" aria-hidden="true"></span>
-                        by Paul Smith
-                        <p class="blockquote">
-                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </p>
-                        <hr>
+                    <div class="form-group">
+                        <label for="message">Review Contents</label>
+                        <textarea class="w-100 form-control" value="<?php echo $editall[0]["message"] ?>" rows="6" type="text"  name="message" id='message'></textarea>
                     </div>
+                        <br/>
+                        <button class="waves-effect waves-light btn" type='submitReviews'>Add / Update Review</button>
+                        <ul id='reviews'>
+                            <?php readReviews(); ?>
+                        </ul>
+                        </form>
+                    <div class='container'>
                 </div>
             </div>
         </div>

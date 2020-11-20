@@ -1,7 +1,7 @@
 <?php
+include_once 'login/header.php'; 
 include ("login/includes/DBController.php");
 require_once 'process.php';
-include_once 'login/header.php';
   
         if (isset($_GET["message"])){ 
         switch($_GET['message']) {
@@ -20,19 +20,22 @@ include_once 'login/header.php';
         if (isset($_GET["productID"])) {
             $senetisedProductId = trim(intval($_GET["productID"]));
             $edit = new DBController();
-            $editall = $edit->runQuery("SELECT * FROM product WHERE productID = $senetisedProductId");
+            $editall = $edit->runQuery("SELECT * FROM news WHERE productID = $senetisedProductId");
             if (!empty($editall)) {
-            ?> 
+            ?>
+            
+        <?php
+        require_once 'process.php'; ?> 
         <div class="container">
         <?php 
         $mysqli = new mysqli('mysql79.unoeuro.com', 'especialphoto_dk', 'ndwa4H69cD', 'especialphoto_dk_db', 3306) or die(mysqli_error($mysqli));
-        $result = $mysqli->query("SELECT * FROM product") or die($mysqli->error);
+        $result = $mysqli->query("SELECT * FROM news") or die($mysqli->error);
         //pre_r($result);
         ?>
         <div class="container">
             <div class="card mt-5">
             <div class="card-header">
-                <h2>Edit <?php echo $editall[0]["pname"];?> product!</h2>
+                <h2>Edit <?php echo $editall[0]["pname"];?> news!</h2>
             </div>
             <div class="card-body">
                 <form action="process.php?productID=<?php echo $_GET["productID"]; ?>" method="POST">
@@ -45,53 +48,23 @@ include_once 'login/header.php';
                         <input type="text" value="<?php echo $editall[0]["Image"] ?>" name="Image" id="Image" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="inStock">In Stock If the product is in stock give value '1', if it is out of stock give value '0'</label>
-                        <input type="number" value="<?php echo $editall[0]["inStock"] ?>" min="0" max="1" name="inStock" id="inStock" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="rating">Rating form 1 - 5</label>
-                        <input type="number" value="<?php echo $editall[0]["rating"] ?>" min="1" max="5" name="rating" id="rating" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="number" value="<?php echo $editall[0]["price"] ?>" min="0" max="9999" name="price" id="price" class="form-control">
-                    </div>
-                    <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="w-100 form-control" rows="6" type="text"  id="description" name="description"><?php echo $editall[0]["description"] ?></textarea>
+                        <textarea class="w-100 form-control" value="<?php echo $editall[0]["description"] ?>" rows="6" type="text"  id="description" name="description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category" value="<?php echo $category ?>" name="category"><?php
-                        $category = new DBController();
-                        $allcategorys = $category->runQuery("SELECT * FROM category");
-                        if (!empty($allcategorys)) { 
-                            foreach($allcategorys as $item){
-                        ?>
-                        <option value="<?php echo $item["catID"] ?>"><?php echo $item["catID"] . $item["categoryName"]?></option>
-                        <?php
-                           }} ?>
-                            </select> 
-                        
-                    </div>
-                    <div class="form-group">
-                    <button type="submit" name="update" class="btn btn-info">Update a product</button>
+                    <button type="submit" name="updatenews" class="btn btn-info">Update a news</button>
                 </div>
                 </form>
             </div>
             </div>
         </div> 
         <br>
-
         <div class="row justify-content-center">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Image</th>
-                        <th>In Stock</th>
-                        <th>Rating</th>
-                        <th>Price</th>
                         <th>Description</th>
                         <th colspan="2">Action</th>
                     </tr>
@@ -101,14 +74,11 @@ include_once 'login/header.php';
                 <tr>
                     <td><?php echo $row['pname']; ?></td>
                     <td><?php echo $row['Image']; ?></td>
-                    <td><?php echo $row['inStock']; ?></td>
-                    <td><?php echo $row['rating']; ?></td>
-                    <td><?php echo $row['price']; ?></td>
                     <td><?php echo $row['description']; ?></td>
                     <td>
-                        <a href="editProduct.php?productID=<?php echo $row['productID']; ?>"
+                        <a href="editNews.php?NewsID=<?php echo $row['NewsID']; ?>"
                         class="btn btn-info">Edit</a>
-                        <a href="editProduct.php?delete=<?php echo $row['productID']; ?>"
+                        <a href="editNews.php?delete=<?php echo $row['NewsID']; ?>"
                         class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
@@ -151,12 +121,12 @@ include_once 'login/header.php';
         <div class="container">
             <div class="card mt-5">
             <div class="card-header">
-                <h2>Create a product!</h2>
+                <h2>Create a news!</h2>
             </div>
             <div class="card-body">
                 <form action="process.php" method="POST">
                     <div class="form-group">
-                        <label for="pname">Product Name</label>
+                        <label for="pname">Name</label>
                         <input type="text" name="pname" id="pname" class="form-control">
                     </div>
                     <div class="form-group">
@@ -164,37 +134,11 @@ include_once 'login/header.php';
                         <input type="text" name="Image" id="Image" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="inStock">In Stock (If the product is in stock give value '1', if it is out of stock give value '0') </label>
-                        <input type="number" min="0" max="1" name="inStock" id="inStock" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="rating">Rating form 1 - 5</label>
-                        <input type="number" min="1" max="5" name="rating" id="rating" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="number" min="0" max="99999" name="price" id="price" class="form-control">
-                    </div>
-                    <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="w-100 form-control" rows="6" type="text" id="description" name="description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category" name="category"><?php
-                        $category = new DBController();
-                        $allcategorys = $category->runQuery("SELECT * FROM category");
-                        if (!empty($allcategorys)) { 
-                            foreach($allcategorys as $item){
-                        ?>
-                        <option value="<?php echo $item["catID"] ?>"><?php echo $item["catID"] . $item["categoryName"]?></option>
-                        <?php
-                           }} ?>
-                            </select> 
-                        
-                    </div>
-                    <div class="form-group">
-                    <button type="submit" name="submit" class="btn btn-info">Create a product</button>
+                    <button type="submit" name="submit" class="btn btn-info">Create news</button>
                 </div>
                 </form>
             </div>

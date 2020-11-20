@@ -3,7 +3,7 @@ include_once 'login/header.php';
 include ("login/includes/DBController.php");
 $edit = new DBController();
 $postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.postalCodee = postalcode.PostalCodeID");
-session_regenerate_id();
+//session_regenerate_id();
 ?>
 <?php 
 define('SITE_KEY', '6Ld-MeMZAAAAAPsXCpNWDOW-FUVhQaum0LO9ZCO9');
@@ -21,20 +21,20 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
             echo 'Please enter a valid captcha code.';
         }
     } */
-    if($_POST){ 
+    if(isset($_POST['submit'])){ 
         function getCaptcha($SecretKey){
             $Response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".SECRET_KEY."&response={$SecretKey}");
             $Return = json_decode($Response);
             return $Return;
         }
         $Return = getCaptcha($_POST['g-recaptcha-response']);
-        //var_dump($Return);
          if($Return->success == true && $Return->score > 0.5){
             echo "Succes!";
         }else{
-            echo "You are a Robot!";
+            echo "reCAPTCHA faild!";
+            return;
         } 
-    };  
+  
     if(isset($_POST['email']) && $_POST['email'] != ''){
         //if we have an email entered
         if($_SESSION["captcha_test"] ==$_POST['captcha']){
@@ -71,7 +71,7 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
         echo 'Please enter a valid captcha code.';
     }
     }
-
+};
 ?>
 
 

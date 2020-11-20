@@ -56,8 +56,9 @@
                 <?php 
                     if (isset($_SESSION['userid'])) { ?> 
                         <?php 
-                        if ($_SESSION['userid'] == 3 ){ ?> 
-                            <li class="nav-item"> <a class="nav-link" href="editProduct.php">Create</a></li>
+                        if ($_SESSION['userid'] == 3 || $_SESSION['userid'] == 1){ ?> 
+                            <li class="nav-item"> <a class="nav-link" href="editProduct.php">Create Products</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="editNews.php">Create News</a></li>
                             <li class="nav-item"> <a class="nav-link" href="companyinfo.php">Edit Company</a></li>
                             <?php
                         } ?>
@@ -75,7 +76,7 @@
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="cart.php">
                     <i class="fa fa-shopping-cart"></i>Cart
-                    <span class="badge badge-light">3</span>
+                    <span class="badge badge-light"><?php echo count($_SESSION['cart']) ?></span>
                 </a>
             </form>
 

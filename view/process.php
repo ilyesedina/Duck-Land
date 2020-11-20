@@ -12,7 +12,8 @@ $category = '';
 if (isset($_POST['update'])) {
     if (isset($_POST['pname']) && isset($_POST['Image']) 
     && isset($_POST['inStock']) && isset($_POST['rating'])
-    && isset($_POST['price']) && isset($_POST['category']) ){
+    && isset($_POST['price'])  && isset($_POST['description'])
+    && isset($_POST['category']) ){
         $pname = filter_var($_POST['pname'], FILTER_SANITIZE_SPECIAL_CHARS);
         $Image = filter_var($_POST['Image'], FILTER_SANITIZE_STRING);
         $inStock = $_POST['inStock'];
@@ -21,16 +22,16 @@ if (isset($_POST['update'])) {
         $description = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
         $category = $_POST['category'];
         $curentproduct = filter_var($_GET["productID"], );
-        $mysqli->query("UPDATE product SET pname = '$pname', Image = '$Image', inStock = $inStock, rating = $rating, price = $price, description = $description, category = $category WHERE productID = $curentproduct") or die($mysqli->error);
+        $mysqli->query("UPDATE product SET pname = '$pname', Image = '$Image', inStock = $inStock, rating = $rating, price = $price, description = '$description', category = $category WHERE productID = $curentproduct") or die($mysqli->error);
         header("location: editProduct.php?message=message1&productID=$curentproduct");
     }
 }
 
 if (isset($_POST['submit'])) {     
-    echo "POSTSENTS"; 
     if (isset($_POST['pname']) && isset($_POST['Image']) 
     && isset($_POST['inStock']) && isset($_POST['rating'])
-    && isset($_POST['price']) && isset($_POST['category']) ){
+    && isset($_POST['price']) && isset($_POST['description'])
+    && isset($_POST['category']) ){
         //echo 'submited';
         $pname = filter_var($_POST['pname'], FILTER_SANITIZE_SPECIAL_CHARS);
         $Image = filter_var($_POST['Image'], FILTER_SANITIZE_STRING);
@@ -41,8 +42,9 @@ if (isset($_POST['submit'])) {
         $category = $_POST['category'];
         $mysqli->query("INSERT INTO product (pname, Image, inStock, rating, price, description, category) VALUES('$pname', '$Image', '$inStock', '$rating', '$price', '$description', '$category')") or die($mysqli->error);
         
-        header("location: editProduct.php?message=message1");
-}}
+        header("location: editProduct.php?message=message1");}
+    echo "POSTSENTS"; 
+    }
 if (isset($_POST['UpdateCopmpany'])) {
     if (isset($_POST['CompanyName']) && isset($_POST['dscription']) 
     && isset($_POST['email']) && isset($_POST['phoneNumber'])

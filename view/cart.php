@@ -1,5 +1,21 @@
 <?php
 include_once 'login/header.php';
+require_once 'login/includes/DBController.php';
+$shoppingcart = New DBController();
+
+//for cart 
+if(!(isset($_SESSION['cart']))) {
+    $_SESSION['cart'] = array();
+}//if cart not exist 
+
+if(isset($_GET['clear'])) {
+    $_SESSION['cart'] = array();
+}//clear cart
+
+if(isset($_GET['delete'])) {
+    $delete1 = $_GET['delete'];
+   unset($_SESSION['cart'][$delete1]);
+}
 
 ?>
 
@@ -20,62 +36,42 @@ include_once 'login/header.php';
                     <thead>
                         <tr>
                             <th scope="col"> </th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Available</th>
-                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col">Item</th>
                             <th scope="col" class="text-right">Price</th>
+                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col">Subtotal</th>
                             <th> </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Dada</td>
-                            <td>In stock</td>
-                            <td><input class="form-control" type="text" value="1" /></td>
-                            <td class="text-right">124,90 €</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Toto</td>
-                            <td>In stock</td>
-                            <td><input class="form-control" type="text" value="1" /></td>
-                            <td class="text-right">33,90 €</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Titi</td>
-                            <td>In stock</td>
-                            <td><input class="form-control" type="text" value="1" /></td>
-                            <td class="text-right">70,00 €</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Sub-Total</td>
-                            <td class="text-right">255,90 €</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Shipping</td>
-                            <td class="text-right">6,90 €</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right"><strong>346,90 €</strong></td>
-                        </tr>
+                        <?php 
+                        $grand = 0;
+                        
+                        foreach($_SESSION['cart'] as $key => $val) {
+                            $sql = "SELECT * FROM product WHERE productID = '$key'";
+                            $product = $shoppingcart->runQuery($sql);
+                            $sub = $val*$product[0]['price'];
+                            $grand += $sub;
+                            echo "  
+                            <tr> 
+                                <td>{$product[0]['pname']}</td>
+                                <td>{$product[0]['price']}</td>
+                                <td>$val</td>
+                                <td>$sub dkk</td>
+                                <td  class='text-right'>
+                                <a href='cart.php?delete={$product[0]['productID']}'><button class='btn btn-sm btn-danger'><i class='fa fa-trash'></i> </button></a>
+                                 </td>
+                            </tr> 
+                            ";
+                        }
+
+                        If(empty($_SESSION['cart'])) {
+                            echo "<tr><td colspan='4'>Your cart is empty!</td></tr>";
+                        } else {
+                            echo "<tr><td colspan='4'>Grand Total: $grand</td></tr>";
+                        }
+                        
+                        ?>
                     </tbody>
                 </table>
             </div>
