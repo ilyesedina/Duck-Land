@@ -1,8 +1,8 @@
 <?php 
 	if (isset($_GET["logout"])){
 		session_start();
-		session_unset();
-		session_destroy();
+		$_SESSION['userid'] = null;
+        $_SESSION['useruid'] = null; 
 		header("location: index.php");
 		exit();
 	} 

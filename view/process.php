@@ -27,6 +27,21 @@ if (isset($_POST['update'])) {
     }
 }
 
+if (isset($_POST['submitnews'])) {
+    if(isset($_POST['title']) && isset($_POST['image']) && isset($_POST['description'])) {
+        $title = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $image = filter_var($_POST['image'], FILTER_SANITIZE_STRING);
+        $description = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS); 
+        $captcha = filter_var($_POST['captcha'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $session_captcha = $_SESSION['captcha_test'];
+        $mysqli->query("INSERT INTO news (title, image, description) VALUES('$title', '$image', '$description')") or die($mysqli->error);
+    
+        header("location: editNews.php?message=message1");  
+    };        
+ echo "POSTSENTS";
+}
+
 if (isset($_POST['submit'])) {     
     if (isset($_POST['pname']) && isset($_POST['Image']) 
     && isset($_POST['inStock']) && isset($_POST['rating'])
@@ -88,4 +103,31 @@ if (isset($_GET['edit'])) {
         $description = $row['description'];
         $category = $row['category'];
     }
+}
+if (isset($_POST["updatenewsall"])) {
+    if (isset($_POST['title']) && isset($_POST['image']) && isset($_POST['description'])) {
+        $formtitle = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $formimage = filter_var($_POST['image'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $formdescription = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $mysqli->query("UPDATE news SET title = '$formtitle', image = '$formimage', description = '$formdescription' WHERE newsID = 1") or die($mysqli->error);
+        header("location: editNews.php?message=message1");
+    }
+    else {
+        header("location: editNews.php?message=message1");
+    }
+}
+if (isset($_GET['updatenews'])) {
+    $newsID = filter_var($_GET['updatenews'], FILTER_SANITIZE_NUMBER_INT);
+    $result = $mysqli->query("SELECT * FROM news WHERE newsID = $newsID") 
+    or die($mysqli->error);
+    if ($result->num_rows == 1){
+        $row = $result->fetch_array();
+        $title = $row["title"];
+        $image = $row["image"];
+        $description = $row["description"];
+         
+    }
+    var_dump($title);
+    var_dump($image);
+    var_dump($description);
 }

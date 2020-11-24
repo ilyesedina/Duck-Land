@@ -18,11 +18,16 @@ class DBController {
 	
 	function runQuery($query) {
 		$result = mysqli_query($this->conn,$query);
+		if($result === true) {
+			return $result;
+		}
+		else {
 		while($row=mysqli_fetch_assoc($result)) {
 			$results[] = $row;
 		}		
 		if(!empty($results))
 			return $results;
+		}
 	}
 	
 	function numRows($query) {

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login</title>
     <!-- CSS -->
-    <<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css"> 
     <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -76,11 +76,18 @@
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="cart.php">
                     <i class="fa fa-shopping-cart"></i>Cart
-                    <span class="badge badge-light"><?php echo count($_SESSION['cart']) ?></span>
+                    <span class="badge badge-light"><?php 
+                    if (isset($_SESSION['cart'])){
+                    if($_SESSION['cart'] == 0) {
+                        echo "0";
+                    } 
+                    else {
+                        echo count($_SESSION['cart']);
+                    } }
+                    ?></span>
                 </a>
             </form>
 
         </div>
     </div>
 </nav>
-<?php

@@ -72,11 +72,17 @@
                     }
                 ?>
             </ul>
-
             <form class="form-inline my-2 my-lg-0">
                 <a class="btn btn-success btn-sm ml-3" href="cart.php">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light"><?php echo count($_SESSION['cart']) ?></span>
+                    <span class="badge badge-light"><?php 
+                    if (isset($_SESSION['cart'])){
+                    if($_SESSION['cart'] == 0) {
+                        echo "0";
+                    } 
+                    else {
+                        echo count($_SESSION['cart']);
+                    } } ?></span>
                 </a>
             </form>
         </div>

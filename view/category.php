@@ -9,11 +9,6 @@ $db_handle = new DBController();
 if(!(isset($_SESSION['cart']))) {
     $_SESSION['cart'];
 }//if cart not exist 
-
-if(isset($_GET['clear'])) {
-    $_SESSION['cart'] = array();
-}//clear cart
-
 $out = "";
 //buy
 if(isset($_GET['productID'])) {
@@ -37,19 +32,19 @@ if(isset($_GET['productID'])) {
 
 echo $out;
 ?>
-<a href="<php echo $_SERVER['PHP_SELF'];?>?clear=1">Clear Cart</a>
 
+<div class="container mt-4" >
+                <div class="row">
+                    
 <?php
     $product_array = $db_handle->runQuery("SELECT * FROM product ORDER BY productID ASC");
 
 	if (!empty($product_array)) { 
 		foreach($product_array as $aNumber=> $value){
     ?>
-                <div class="container">
-                <div class="row">
+                   
+                    <div class="col-4 mb-4">
                     <div class="card">
-                    <div class="col-12 col-3">
-                        
                     <form method="POST" action="category.php?action=add&productID=<?php echo $product_array[$aNumber]["productID"]; ?>"> 
                         <div class="card-body">
                         <img class="card-img-top" src="img/<?php echo $product_array[$aNumber]["Image"]; ?>" alt="Card image cap">
@@ -68,19 +63,29 @@ echo $out;
                                     }
                                     ?>
                                 </div> </div>
-                               <?php if($product_array[$aNumber]["inStock"] == 1) { ?>
+        
+                               <?php
+                               if (isset($_SESSION['userid'])){
+                                if($product_array[$aNumber]["inStock"] == 1) { ?>
+                                
                                 <div class="row"> 
                                 <label for="quantity">Product quantity</label>
                                 <input type="number" name="quantity" >
                                 </div> 
-                              <?php }?>
+                              <?php }}
+                              ?>
                                 
                                 <div class="col">
-                                </div>
+                                
                                <?php 
-                               if($product_array[$aNumber]["inStock"] == 1) { ?>
+                               if (isset($_SESSION['userid'])){
+                               if($product_array[$aNumber]["inStock"] == 1) { ?> <br>
                                   <button type="submit" name="update" class="btn btn-info">Add to cart</button>
-                         <?php }
+                            <?php }}
+                            else {
+                                echo "Login for shop items!";
+                            } ?>
+                            </div> <br>  <?php
                         if (isset($_SESSION['userid'])) { 
                             if ($_SESSION['userid'] == 3 || $_SESSION['userid'] ==1 ){ ?> 
                                 <a href="editProduct.php?productID=<?php echo $product_array[$aNumber]["productID"]; ?>" class="btn btn-success btn-block">Edit</a>
@@ -89,13 +94,12 @@ echo $out;
                         </div>
                     </form>
                     </div></div>
-                </div></div>
 
                 <?php
 			}
 	}
     ?>
-
+</div></div>
 <?php
 include_once 'login/footer.php';
 ?>

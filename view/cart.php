@@ -46,7 +46,7 @@ if(isset($_GET['delete'])) {
                     <tbody>
                         <?php 
                         $grand = 0;
-                        
+                       
                         foreach($_SESSION['cart'] as $key => $val) {
                             $sql = "SELECT * FROM product WHERE productID = '$key'";
                             $product = $shoppingcart->runQuery($sql);
@@ -84,6 +84,10 @@ if(isset($_GET['delete'])) {
                 <div class="col-sm-12 col-md-6 text-right">
                     <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
                 </div>
+                <div class="col-sm-12  col-md-6">
+                    <button class="btn btn-block btn-danger" href="cart.php?clear=true">Clear Cart</button>
+                </div>
+
             </div>
         </div>
     </div>
