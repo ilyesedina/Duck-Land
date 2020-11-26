@@ -24,7 +24,7 @@ if(isset($_GET['delete'])) {
 
 <section >
     <div class="container">
-        <h4 class="jumbotron-heading">Your Shopping Card</h4>
+        <h4 class="jumbotron-heading">Your Shopping Cart</h4>
      </div>
 </section>
 
@@ -35,12 +35,11 @@ if(isset($_GET['delete'])) {
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col"> </th>
-                            <th scope="col">Item</th>
-                            <th scope="col" class="text-right">Price</th>
-                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col">Item name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
                             <th scope="col">Subtotal</th>
-                            <th> </th>
+                            <th scope="col" class="text-right">Remove item</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +54,7 @@ if(isset($_GET['delete'])) {
                             echo "  
                             <tr> 
                                 <td>{$product[0]['pname']}</td>
-                                <td>{$product[0]['price']}</td>
+                                <td>{$product[0]['price']} dkk</td>
                                 <td>$val</td>
                                 <td>$sub dkk</td>
                                 <td  class='text-right'>

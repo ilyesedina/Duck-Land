@@ -29,9 +29,9 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
         }
         $Return = getCaptcha($_POST['g-recaptcha-response']);
          if($Return->success == true && $Return->score > 0.5){
-            echo "Succes!";
+            
         }else{
-            echo "reCAPTCHA faild!";
+            echo "reCAPTCHA failed!";
             return;
         } 
   
@@ -126,7 +126,7 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
 
         <div class="col-12 col-sm-4">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
+                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> About the company</div>
                 <div class="card-body">
 
                     <p> <b>CompanyName:</b>     <?php echo $postalcode[0]["CompanyName"];?></p>
@@ -193,7 +193,7 @@ define('SECRET_KEY', '6Ld-MeMZAAAAACVrQgLaeO69RAUud8ZYaUrHB8vz');
             </div>
         <div class="col-12 col-sm-4">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
+                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> About the company</div>
                 <div class="card-body">
                     <p> <b>CompanyName:</b>     <?php echo $postalcode[0]["CompanyName"];?></p>
                     <p> <b>Dscription:</b>     <?php echo $postalcode[0]["dscription"];?></p>
