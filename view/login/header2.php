@@ -83,7 +83,7 @@
                     } 
                     else {
                         echo count($_SESSION['cart']);
-                    } }
+                    }}
                     ?></span>
                 </a>
             </form>

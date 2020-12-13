@@ -2,7 +2,7 @@
 include_once 'login/header.php';
 include ("login/includes/DBController.php");
 $edit = new DBController();
-$postalcode = $edit->runQuery("SELECT * FROM company JOIN postalcode ON company.postalCodee = postalcode.PostalCodeID");
+$postalcode = $edit->runQuery("SELECT * FROM companyinformation");
 //session_regenerate_id();
 ?>
 <?php 

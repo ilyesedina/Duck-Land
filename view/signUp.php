@@ -7,7 +7,6 @@
     <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
-
                     <form class="login100-form validate-form">
                         <span class="login100-form-title">
                             Create an acount
@@ -51,14 +50,6 @@
                             <span class="symbol-input100">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
-                        </div>
-
-                        <div><tr class="tablerow">
-                                <p><img src="login/includes/captcha.php" alt="captcha image" name="captcha" ></p>
-                                <input name="captcha" id="captcha" type="text" placeholder="Type the captcha..."
-                                    class="demo-input captcha-input">
-                                 <br> </br>
-                            </tr> 
                         </div>
                         <div class="container-login100-form-btn">
                             <button name="submit" class="login100-form-btn">

@@ -2,8 +2,9 @@
 include_once 'login/header.php'; 
 include ("login/includes/DBController.php");
 require_once 'process.php';
+
 $companycon = new DBController();
-$editall = $companycon->runQuery("SELECT * FROM company JOIN postalcode ON company.postalCodee = postalcode.PostalCodeID");
+$editall = $companycon->runQuery("SELECT * FROM companyinformation");
 if ($_SESSION['userid'] == 3 || $_SESSION['userid'] ==1 ){
 
     if (isset($_GET["message"])){ 
@@ -50,7 +51,7 @@ if ($_SESSION['userid'] == 3 || $_SESSION['userid'] ==1 ){
                 <label for="postalCodee">Postal Codee</label>
                 <select id="postalCodee" value="<?php echo $postalCodee ?>" name="postalCodee"><?php
                 $category = new DBController();
-                $allcategorys = $category->runQuery("SELECT * FROM postalcode");
+                $allcategorys = $category->runQuery("SELECT * FROM postalCode");
                 if (!empty($allcategorys)) { 
                     foreach($allcategorys as $item){
                 ?>

@@ -82,7 +82,8 @@
                     } 
                     else {
                         echo count($_SESSION['cart']);
-                    } } ?></span>
+                    } } 
+                    ?></span>
                 </a>
             </form>
         </div>

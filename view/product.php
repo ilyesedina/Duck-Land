@@ -1,12 +1,33 @@
 <?php
 include_once 'login/header.php';
-
 require_once("login/includes/DBController.php");
+//for cart 
+if(!(isset($_SESSION['cart']))) {
+    $_SESSION['cart'];
+}//if cart not exist 
+$out = "";
+//buy
+if(isset($_POST['update'])) {
+    $productID = $_GET['productID'];
+    $quantity = $_POST['quantity'];
+
+    if($quantity > 0 && filter_var($quantity, FILTER_VALIDATE_INT)) {
+       if(isset($_SESSION['cart'][$productID])) {
+        $_SESSION['cart'][$productID] += $quantity;
+       } else {
+        $_SESSION['cart'][$productID] = $quantity;
+       }
+    } else {
+        //if bad input
+        $out = "Bad Input";
+
+    }
+}
 $db_handle = new DBController();
 if (isset($_GET["productID"])) {
     $senetisedProductId = trim(intval($_GET["productID"]));
     $edit = new DBController();
-    $editall = $edit->runQuery("SELECT * FROM product JOIN category ON product.category = category.catID WHERE productID = $senetisedProductId");
+    $editall = $edit->runQuery("SELECT * FROM productview WHERE productID = $senetisedProductId");
     if (!empty($editall)) {
 ?>
 <body>
@@ -35,7 +56,10 @@ if (isset($_GET["productID"])) {
                     
                     <p class="price"><?php echo $editall[0]["price"] ?>dkk</p>
                  <!--   <p class="price_discounted">149.90 $</p> -->
-                    <form method="get" action="cart.php">
+                 <?php $product_array = $db_handle->runQuery("SELECT * FROM product WHERE productID = $senetisedProductId"); ?>
+                    <form method="POST" action="product.php?action=add&productID=<?php echo $product_array[0]["productID"];?>">
+                   <?php 
+                   if($product_array[0]["inStock"] == 1) { ?> 
                         <div class="form-group">
                             <label>Quantity :</label>
                             <div class="input-group mb-3">
@@ -52,15 +76,16 @@ if (isset($_GET["productID"])) {
                                 </div>
                             </div>
                         </div>
-
-                        <a href="cart.php" class="btn btn-success btn-lg btn-block text-uppercase">
+                        
+                        <button type="submit" name="update" class="btn btn-success btn-lg btn-block text-uppercase">
                             <i class="fa fa-shopping-cart"></i> Add To Cart
-                        </a>
+                            </button>
+                   <?php }; ?>
                     </form>
                     <div class="reviews_product p-3 mb-2 ">
                         Rating 
                         <?php
-                        for ($x = 0; $x <= $editall[0]["rating"]; $x++) { ?>
+                        for ($x = 0; $x < $editall[0]["rating"]; $x++) { ?>
                              <i class="fa fa-star"></i>
                               <?php
                           }
@@ -81,7 +106,7 @@ if (isset($_GET["productID"])) {
                 <?php 
                 $messagedescript = "Dosen't have a description of this product.";
                 
-                if (isset($editall[0]["description"])) {
+                if ($editall[0]["description"] != '' && isset($editall[0]["description"])) {
                 echo $editall[0]["description"];
                 }
                 else {

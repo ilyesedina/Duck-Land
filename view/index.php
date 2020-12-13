@@ -24,8 +24,10 @@ if (isset($_GET["delete"])) {
                     <img class="card-img-top" src="img/<?php echo $product_array[$aNumber]["image"]; ?>" alt="Card image cap">
                <?php }?>
                 <p class="card-text"><?php echo $product_array[$aNumber]["description"]; ?></p>
+              <?php  if ($_SESSION['userid'] == 3 || $_SESSION['userid'] ==1 ) { ?>
                 <a href="index.php?delete=<?php echo $product_array[$aNumber]["newsID"]; ?>"><button class="btn btn-danger">DELETE</button></a>
                 <a href="editNews.php?updatenews=<?php echo $product_array[$aNumber]["newsID"]; ?>"><button class="btn btn-success">EDIT</button></a>
+                <?php }; ?>
             </div>
             
         </div>

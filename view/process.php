@@ -88,6 +88,7 @@ if (isset($_GET['delete'])) {
     header("location: editProduct.php?message=message2");
 }
 
+
 if (isset($_GET['edit'])) {
     $productID = filter_var($_GET['edit'], FILTER_SANITIZE_NUMBER_INT);
     $update = true;
@@ -106,14 +107,15 @@ if (isset($_GET['edit'])) {
 }
 if (isset($_POST["updatenewsall"])) {
     if (isset($_POST['title']) && isset($_POST['image']) && isset($_POST['description'])) {
+        $articleid = filter_var($_GET['updatenews'], FILTER_SANITIZE_NUMBER_INT);
         $formtitle = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
         $formimage = filter_var($_POST['image'], FILTER_SANITIZE_SPECIAL_CHARS);
         $formdescription = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $mysqli->query("UPDATE news SET title = '$formtitle', image = '$formimage', description = '$formdescription' WHERE newsID = 1") or die($mysqli->error);
+        $mysqli->query("UPDATE news SET title = '$formtitle', image = '$formimage', description = '$formdescription' WHERE newsID = $articleid") or die($mysqli->error);
         header("location: editNews.php?message=message1");
     }
     else {
-        header("location: editNews.php?message=message1");
+        header("location: editNews.php?message=message3");
     }
 }
 if (isset($_GET['updatenews'])) {
@@ -127,7 +129,4 @@ if (isset($_GET['updatenews'])) {
         $description = $row["description"];
          
     }
-    var_dump($title);
-    var_dump($image);
-    var_dump($description);
 }
