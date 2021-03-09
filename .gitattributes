@@ -6,3 +6,5 @@
 *.xml linguist-detectable=false 
 *.css linguist-detectable=false
 *.php linguist-detectable=true 
+*.sql linguist-language=sql
+*.my linguist-language=sql
